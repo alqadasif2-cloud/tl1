@@ -27,6 +27,43 @@ tasks.register("clean", Delete::class) {
 }`,
   },
   {
+    path: 'gradlew',
+    content: `#!/bin/sh
+set -e
+APP_HOME="$(cd "\$(dirname "\$0")" >/dev/null && pwd -P)"
+CLASSPATH="\$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+if [ ! -f "\$CLASSPATH" ]; then
+    if which gradle >/dev/null 2>&1; then exec gradle "\$@"; fi
+    mkdir -p "\$APP_HOME/gradle/wrapper"
+    curl -sSL -o "\$CLASSPATH" "https://raw.githubusercontent.com/gradle/gradle/v8.6.0/gradle/wrapper/gradle-wrapper.jar" || true
+fi
+if [ -f "\$CLASSPATH" ]; then
+    exec java -classpath "\$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "\$@"
+else
+    exec gradle "\$@"
+fi`,
+  },
+  {
+    path: 'gradlew.bat',
+    content: `@rem Gradle wrapper batch script for Windows
+@if "%DEBUG%" == "" @echo off
+set DIRNAME=%~dp0
+if "%DIRNAME%" == "" set DIRNAME=.
+set APP_HOME=%DIRNAME%
+set CLASSPATH=%APP_HOME%\\gradle\\wrapper\\gradle-wrapper.jar
+java -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*`,
+  },
+  {
+    path: 'gradle/wrapper/gradle-wrapper.properties',
+    content: `distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+distributionUrl=https\\://services.gradle.org/distributions/gradle-8.6-bin.zip
+networkTimeout=10000
+validateDistributionUrl=true
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists`,
+  },
+  {
     path: 'settings.gradle.kts',
     content: `pluginManagement {
     repositories {
