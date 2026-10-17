@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TForwarder Pro</string>
+    <string name="channel_service_name">Telegram Forwarding Service</string>
+    <string name="channel_service_desc">Keeps the auto-forwarding engine active in real-time</string>
+    <string name="channel_alerts_name">Forwarding Notifications</string>
+    <string name="channel_alerts_desc">Alerts for errors and important status updates</string>
+    <string name="service_running_title">TForwarder is actively monitoring</string>
+    <string name="service_running_desc">Active rules: %1$d | Processed: %2$d</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_open">Open App</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">تي فورواردر برو</string>
+    <string name="channel_service_name">خدمة إعادة التوجيه لتيليجرام</string>
+    <string name="channel_service_desc">تبقي محرك إعادة التوجيه التلقائي يعمل لحظيًا في الخلفية</string>
+    <string name="channel_alerts_name">تنبيهات إعادة التوجيه</string>
+    <string name="channel_alerts_desc">تنبيهات بالأخطاء والتحديثات المهمة للعمليات</string>
+    <string name="service_running_title">تي فورواردر يراقب الرسائل لحظيًا</string>
+    <string name="service_running_desc">القواعد النشطة: %1$d | الرسائل المعالجة: %2$d</string>
+    <string name="action_stop">إيقاف الخدمة</string>
+    <string name="action_open">فتح التطبيق</string>
+</resources>

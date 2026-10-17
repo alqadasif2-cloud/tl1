@@ -1,0 +1,6 @@
+{
+  "name": "TForwarder Pro - Telegram Auto Forwarder",
+  "description": "Native Android app and engine for automated Telegram message forwarding with custom rules, regex filters, text transformations, and media support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
