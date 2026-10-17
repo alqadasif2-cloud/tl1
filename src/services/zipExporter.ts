@@ -280,12 +280,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
+      - name: Accept Licenses
+        run: |
+          mkdir -p "$ANDROID_HOME/licenses" || true
+          echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" >> "$ANDROID_HOME/licenses/android-sdk-license"
+          echo "84831b9409646a918e30573bab4c9c91346d8abd" >> "$ANDROID_HOME/licenses/android-sdk-preview-license"
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses || true
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --stacktrace --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: tforwarder-debug-apk
-          path: app/build/outputs/apk/debug/*.apk`,
+          path: android/app/build/outputs/apk/debug/*.apk`,
   },
   {
     path: 'app/src/main/java/com/example/tforwarder/TForwarderApp.kt',

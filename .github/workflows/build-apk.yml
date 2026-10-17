@@ -20,28 +20,20 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: gradle
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-disabled: false
-
-      - name: Prepare Gradle Wrapper
+      - name: Accept Android SDK Licenses
         run: |
-          cd android
-          if [ ! -f "gradlew" ]; then
-            echo "Generating Gradle wrapper..."
-            gradle wrapper --gradle-version 8.6
-          fi
-          chmod +x gradlew
-          ls -la gradlew
+          mkdir -p "$ANDROID_HOME/licenses" || true
+          echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" >> "$ANDROID_HOME/licenses/android-sdk-license"
+          echo "84831b9409646a918e30573bab4c9c91346d8abd" >> "$ANDROID_HOME/licenses/android-sdk-preview-license"
+          echo "d56f5187479451eabf01fb78af6dfcb131a6481e" >> "$ANDROID_HOME/licenses/android-sdk-license"
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses || true
 
       - name: Build Debug APK
         run: |
           cd android
+          chmod +x gradlew
           ./gradlew assembleDebug --stacktrace --no-daemon
 
       - name: Upload Debug APK Artifact
@@ -50,7 +42,7 @@ jobs:
           name: tforwarder-debug-apk
           path: android/app/build/outputs/apk/debug/*.apk
           retention-days: 14
-          if-no-files-found: warn
+          if-no-files-found: error
 
       - name: Build Release APK (Unsigned)
         run: |
